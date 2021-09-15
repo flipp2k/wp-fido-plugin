@@ -4,81 +4,29 @@
 * This file will create custom rest API endpoints
 */
 
-/* class WP_React_Settings_Rest_Routes {
+ class WP_React_Settings_Rest_Routes {
 
-//      function __constuct() {
-//         add_action('rest_api_init', , 'create_rest_routes');
-//     }
+    public function __construct() {
+        add_action( 'rest_api_init', [ $this, 'create_rest_routes' ] );
+    }
 
-//      function create_rest_routes() {
-
-//         register_rest_route( 'wp/v2', '/fido-settings', [
-//             'methods' => 'GET',
-//             'callback' => , 'get_settings',
-//             'permission_callback' => , 'get_settings_persmission'
-//         ]);
-
-//         register_rest_route( 'wpfa/v1', 'settings', [
-//             'methods' => 'POST',
-//             'callback' => , 'save_settings',
-//             'permission_callback' => , 'save_settings_persmission'
-//         ]);
-
-//         //register_rest_route( $namespace:string, $route:string, $args:array, $override:boolean )
-//     }
-
-//      function get_settings() {
-//         $response = [
-//             'firstName' => 'John',
-//             'lastName' => 'Doe',
-//             'email' => 'john@gmail.com'
-//         ];
-
-//         return rest_ensure_response( $response );
-//     }
-
-
-//      function save_settings() {
-
-//     }
-
-
-
-//      function get_settings_persmission() {
-
-//     }
-
-//      function save_settings_persmission() {
-    
-//         return true;
-//     }
-
-// }
-
-// new WP_React_Settings_Rest_Routes();
-
-*/
-    
-    add_action('rest_api_init', 'create_rest_routes');
-
-
-     function create_rest_routes() {
-
-        register_rest_route( 'wpfa/v1', '/fido-settings', [
+     public function create_rest_routes() {
+        register_rest_route( 'fa/v1', '/settings', [
             'methods' => 'GET',
-            'callback' => 'get_fido_settings',
-            'permission_callback' => 'get_settings_persmission'
-        ]);
+            'callback' => [ $this, 'get_settings' ],
+            'permission_callback' => [ $this, 'get_settings_permission' ]
+        ] );
 
         register_rest_route( 'wpfa/v1', 'settings', [
             'methods' => 'POST',
-            'callback' => 'save_fido_settings',
-            'permission_callback' => 'save_settings_persmission'
+            'callback' => [$this, 'save_settings'],
+            'permission_callback' => [$this,'save_settings_persmission']
         ]);
 
-    }
+   }
 
-     function get_fido_settings() {
+
+     public function get_settings() {
         $response = [
             'firstName' => 'John',
             'lastName' => 'Doe',
@@ -89,19 +37,22 @@
     }
 
 
-     function save_fido_settings() {
+    public function save_settings() {
 
     }
 
 
 
-     function get_settings_persmission() {
+    public function get_settings_permission() {
         return true;
     }
 
-     function save_settings_persmission() {
-
+     public function save_settings_persmission() {
         return true;
     }
+
+}
+
+new WP_React_Settings_Rest_Routes();
 
 
