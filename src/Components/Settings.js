@@ -8,7 +8,7 @@ const Settings = () => {
 				<h2>Fido Awards Settings</h2>
 			</div>
 			<div id="fido-setting-form" className="wrap">
-				{/* <form id="fido-award-settings-form">
+				<form id="fido-award-settings-form">
 					<table className="form-table" role="presentation">
 						<tbody>
 							<tr>
@@ -55,7 +55,7 @@ const Settings = () => {
 							</tr>
 						</tbody>
 					</table>
-				</form> */}
+				</form>
 
 				<p className="submit">
 					<button type="submit" className="button button-primary">

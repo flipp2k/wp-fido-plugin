@@ -42,5 +42,30 @@ function load_scripts() {
 
 // add_shortcode('fido-awards', 'display_fido_awards');
 
+
+
+ function create_fido_db() {
+    global $wpdb;
+    $charset_collate = $wpdb->get_charset_collate();
+    require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+    
+    $table_name = $wpdb->prefix .'fido_awards';
+
+    //Create the fido admin table
+    $create_table = "CREATE TABLE $table_name (
+        id INTEGER NOT NULL  AUTO_INCREMENT,
+        first_name TEXT NOT NULL,
+        last_name TEXT NOT NULL,
+        titles TEXT, 
+        create_date TIMESTAMP NOT NULL,
+        PRIMARY KEY (id)
+    ) $charset_collate";
+        
+    //create table if doesn't exist
+    maybe_create_table( $table_name, $create_table);
+}
+
+register_activation_hook( __FILE__, 'create_fido_db' );
+
 require_once FA_PATH . 'classes/create-admin-menu.php';
 require_once FA_PATH . 'classes/create-settings-routes.php';
