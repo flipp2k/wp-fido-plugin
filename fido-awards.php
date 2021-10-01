@@ -35,12 +35,12 @@ function load_scripts() {
     ] );
 } 
 
-// function display_fido_awards() {
+function display_fido_awards() {
 
-// 	return '<div id="fido-show-fido-awards" ></div>';
-// }
+	return '<div id="fido-show-fido-awards" ></div>';
+}
 
-// add_shortcode('fido-awards', 'display_fido_awards');
+add_shortcode('fido-awards', 'display_fido_awards');
 
 
 
@@ -64,6 +64,19 @@ function load_scripts() {
     //create table if doesn't exist
     maybe_create_table( $table_name, $create_table);
 }
+
+
+// Possible upgrade routine
+
+// function upgrade() {
+//     $saved_version = (int) get_site_option($table_name. 'db_version');
+
+//     if ($saved_version < 200 && create_fido_db()) {
+//         update_site_option($table_name. 'db_version', 200);
+//     }
+// }
+
+
 
 register_activation_hook( __FILE__, 'create_fido_db' );
 

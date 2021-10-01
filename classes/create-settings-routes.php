@@ -11,7 +11,7 @@
     }
 
      public function create_rest_routes() {
-        register_rest_route( 'fa/v1', '/settings', [
+        register_rest_route( 'wpfa/v1', '/settings', [
             'methods' => 'GET',
             'callback' => [ $this, 'get_settings' ],
             'permission_callback' => [ $this, 'get_settings_permission' ]
@@ -27,18 +27,48 @@
 
 
      public function get_settings() {
-        $response = [
-            'firstName' => 'John',
-            'lastName' => 'Doe',
-            'email' => 'john@gmail.com'
-        ];
+        global $wpdb;
+        $table = $wpdb->prefix . 'fido_awards';
+        $dbQuery = $wpdb->prepare( 'SELECT * FROM ' . $table); 
 
-        return rest_ensure_response( $response );
+        $response = $wpdb->get_results($dbQuery);
+
+        return rest_ensure_response(  $response );
     }
 
 
-    public function save_settings() {
+    public function save_settings( $request) {
+        // To get form data
+        $firstName =  $request['firstName'] ;
+        $lastName =  $request['lastName'] ;
+        $titles = $request['titles'] ;
 
+        // To get data as json
+        //$data =  $request->get_json_params();
+
+        global $wpdb;
+        $table = $wpdb->prefix . 'fido_awards';
+        $data = array(
+            'first_name' =>  $firstName,
+            'last_name' =>  $lastName,
+            'titles' =>  $titles,
+            'create_date' => current_time( 'mysql' )
+        );
+
+        $format = array(
+            '%s',
+            '%s',
+            '%s',
+            '%s'
+        );
+
+       $success=$wpdb->insert( $table, $data, $format );
+       
+    //    if( is_wp_error( 'Error' ) ) {
+    //     echo $return->get_error_message();
+    //}
+1
+       return rest_ensure_response('Success');
     }
 
 

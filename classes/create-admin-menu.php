@@ -25,63 +25,13 @@
     }
 
     public function menu_page_templage() {
-        //echo('<div class="wrap"><div id="fido-admin-app"></div></div>');
-        echo('<div>
-        <h2>Fido Awards Settings</h2>
-    </div>
-    <div id="fido-setting-form" className="wrap">
-        <form method = "POST" action="?page=add_data">
-            <table className="form-table" role="presentation">
-                <tbody>
-                    <tr>
-                        <th scope="row">
-                            <label>FirstName</label>
-                        </th>
-                        <td>
-                            <input
-                                type="text"
-                                name="firstName"
-                                className="regular-text"
-                            />
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">
-                            <label htmlFor="lastName">lastName</label>
-                        </th>
-                        <td>
-                            <input
-                                type="text"
-                                id="lastName"
-                                name="lastName"
-                                className="regular-text"
-                            />
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">
-                            <label htmlFor="email">email</label>
-                        </th>
-                        <td>
-                            <input
-                                type="email"
-                                id="email"
-                                name="email"
-                                className="regular-text"
-                            />
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <button type="submit" value="submit">
-                Save
-            </button>
-        </form>
-    </div>');
+        echo('<div class="wrap"><div id="fido-admin-app"></div></div>');
     }
 
    
-
+    public function send_data() {
+        echo ('data sent');
+    }
 
 
 
