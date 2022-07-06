@@ -7,14 +7,14 @@
  class WP_React_Settings_Rest_Routes {
 
     public function __construct() {
-        add_action( 'rest_api_init', [ $this, 'create_rest_routes' ] );
+        add_action( 'rest_api_init', [ $this, 'create_rest_routes' ]);
     }
 
      public function create_rest_routes() {
         register_rest_route( 'wpfa/v1', '/settings', [
             'methods' => 'GET',
             'callback' => [ $this, 'get_settings' ],
-            'permission_callback' => [ $this, 'get_settings_permission' ]
+            'permission_callback' => [ $this, 'get_settings_permission']
         ] );
 
         register_rest_route( 'wpfa/v1', 'settings', [
@@ -67,7 +67,6 @@
     //    if( is_wp_error( 'Error' ) ) {
     //     echo $return->get_error_message();
     //}
-1
        return rest_ensure_response('Success');
     }
 
