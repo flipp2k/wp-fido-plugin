@@ -24,11 +24,10 @@ const Settings = (props) => {
 	};
 
 	const onSubmit = () => {
-		console.clear();
 		console.log(formValues);
-		debugger;
+		// debugger;
 		axios
-			.post("http://test-site.local/wp-json/wpfa/v1/settings", formValues)
+			.post("/wp-json/wpfa/v1/settings", formValues)
 			.then(function (response) {
 				console.log(response);
 				alert("form saved");

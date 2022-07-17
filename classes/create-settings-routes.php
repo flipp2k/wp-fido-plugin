@@ -71,19 +71,23 @@
 
        $success=$wpdb->insert( $table, $data, $format );
        
-    //    if( is_wp_error( 'Error' ) ) {
-    //     echo $return->get_error_message();
-    //}
+       if( is_wp_error( 'Error' ) ) {
+        echo $return->get_error_message();
+    }
        return rest_ensure_response('Success');
     }
 
 
 
     public function get_settings_permission() {
-        return true;
+        // return user_can(wp_get_current_user(),'edit_posts');
+         return true;
     }
 
      public function save_settings_persmission() {
+        echo user_can(wp_get_current_user(),'edit_posts');
+
+        // return user_can(wp_get_current_user(),'edit_posts');
         return true;
     }
 
