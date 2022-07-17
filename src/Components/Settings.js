@@ -2,7 +2,19 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const Settings = (props) => {
-	const [formValues, setFormValues] = useState({});
+	// const [data, setData] = useState();
+	const [formValues, setFormValues] = useState({
+		titles: "Fido approved",
+	});
+
+	// useEffect(() => {
+	// 	axios
+	// 		.get("http://test-site.local/wp-json/wpfa/v1/settings")
+	// 		.then(function (response) {
+	// 			// handle success
+	// 			console.log(response.data);
+	// 		});
+	// }, []);
 
 	const handleFormChange = (event) => {
 		setFormValues(
@@ -11,19 +23,19 @@ const Settings = (props) => {
 		console.log(formValues);
 	};
 
-	const onSubmit = (data) => {
-		alert(data);
-
-		// const requestOptions = {
-		// 	method: "POST",
-		// 	headers: { "Content-Type": "application/json" },
-		// 	body: JSON.stringify(data),
-		// };
-
-		// fetch(
-		// 	"http://testsite.local/wp-json/wpfa/v1/settings",
-		// 	requestOptions
-		// ).then((response) => response.json());
+	const onSubmit = () => {
+		console.clear();
+		console.log(formValues);
+		debugger;
+		axios
+			.post("http://test-site.local/wp-json/wpfa/v1/settings", formValues)
+			.then(function (response) {
+				console.log(response);
+				alert("form saved");
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
 	};
 
 	return (
@@ -74,23 +86,19 @@ const Settings = (props) => {
 									/>
 								</td>
 							</tr>
-							<tr>
-								<td>
-									<input type="submit" />
-								</td>
-							</tr>
 						</tbody>
 					</table>
 				</form>
 
-				{/* <p className="submit">
+				<p className="submit">
 					<button
 						//type="submit"
 						className="button button-primary"
+						onClick={onSubmit}
 					>
 						Save
 					</button>
-				</p> */}
+				</p>
 			</div>
 		</React.Fragment>
 	);

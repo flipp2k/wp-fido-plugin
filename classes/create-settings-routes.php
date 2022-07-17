@@ -39,9 +39,14 @@
 
     public function save_settings( $request) {
         // To get form data
-        $firstName =  $request['firstName'] ;
-        $lastName =  $request['lastName'] ;
-        $titles = $request['titles'] ;
+        echo($request);
+        $data = json_decode($request);
+
+        
+        $firstName =  $data -> firstName;
+        $lastName =  $data ->lastName ;
+        $titles = $data -> titles;
+        $email = $data ->email;
 
         // To get data as json
         //$data =  $request->get_json_params();
@@ -52,10 +57,12 @@
             'first_name' =>  $firstName,
             'last_name' =>  $lastName,
             'titles' =>  $titles,
+            'email' =>  $email,
             'create_date' => current_time( 'mysql' )
         );
 
         $format = array(
+            '%s',
             '%s',
             '%s',
             '%s',
